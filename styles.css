@@ -1,0 +1,241 @@
+/* styles.css */
+
+/* --- Reset / base --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light dark;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.5;
+}
+
+/* --- Theme tokens --- */
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: #e2e8f0;
+  --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+  --radius: 14px;
+  --accent: #2563eb;
+
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.25rem;
+  --space-5: 1.75rem;
+  --space-6: 2.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --surface: #0f172a;
+    --text: #e5e7eb;
+    --muted: #a1a1aa;
+    --border: #23304a;
+    --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    --accent: #60a5fa;
+  }
+}
+
+/* --- Layout --- */
+body {
+  background: var(--bg);
+  color: var(--text);
+  padding: var(--space-6) var(--space-3);
+}
+
+main {
+  width: min(920px, 100%);
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: clamp(1.5rem, 1.2rem + 2vw, 2.25rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-4);
+}
+
+h2 {
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  margin: var(--space-6) 0 var(--space-2);
+}
+
+p {
+  margin: var(--space-2) 0;
+  color: var(--text);
+}
+
+/* --- Form card --- */
+#milestone-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-2);
+}
+
+label {
+  font-weight: 600;
+  color: var(--text);
+  margin-top: var(--space-2);
+}
+
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+input[type="number"]::placeholder {
+  color: color-mix(in oklab, var(--muted) 70%, transparent);
+}
+
+button[type="reset"] {
+  margin-top: var(--space-3);
+  justify-self: start;
+  padding: 0.65rem 0.95rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--surface) 85%, var(--accent));
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button[type="reset"]:hover {
+  filter: brightness(1.03);
+}
+
+button[type="reset"]:active {
+  transform: translateY(1px);
+}
+
+/* Better keyboard focus */
+:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--accent) 65%, transparent);
+  outline-offset: 2px;
+}
+
+/* Hint */
+.hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* --- Results --- */
+#results {
+  margin-top: var(--space-6);
+}
+
+#average-per-week {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* --- Milestones grid --- */
+.milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.milestone-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.milestone-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--accent);
+  opacity: 0.9;
+}
+
+.milestone-card h3 {
+  margin: 0;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+}
+
+.milestone-date {
+  margin: var(--space-2) 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* End-of-year projection */
+#end-of-year-projection {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* --- Motion preferences --- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* --- Print: clean output --- */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+    padding: 0;
+  }
+  #milestone-form button[type="reset"],
+  .hint {
+    display: none !important;
+  }
+  #milestone-form,
+  .milestone-card {
+    box-shadow: none !important;
+  }
+}
+
+.summary-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-4);
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: var(--space-6) 0;
+}
