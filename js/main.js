@@ -46,7 +46,7 @@ function renderMilestones(milestoneDates, endOfYearProjection, averagePerWeek) {
   }
 
   document.getElementById("average-per-week").textContent = Number.isFinite(
-    averagePerWeek
+    averagePerWeek,
   )
     ? averagePerWeek.toFixed(1)
     : "—";
@@ -85,7 +85,7 @@ function calculateAndRender() {
   renderMilestones(
     result.milestoneDates,
     result.endOfYearProjection,
-    result.averagePerWeek
+    result.averagePerWeek,
   );
 }
 

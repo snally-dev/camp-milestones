@@ -12,7 +12,7 @@ function clamp(n, min, max) {
 function dayNumberLocal(date) {
   const d = date instanceof Date ? date : new Date(date);
   return Math.floor(
-    Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / MS_PER_DAY
+    Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / MS_PER_DAY,
   );
 }
 
@@ -119,7 +119,7 @@ export function formatDate(date) {
 export function calculateMilestones(
   currentCount,
   startDate,
-  today = new Date()
+  today = new Date(),
 ) {
   const start = startOfDayLocal(startDate);
   const now = startOfDayLocal(today);
@@ -148,7 +148,7 @@ export function calculateMilestones(
         startDate: start,
         today: now,
       }),
-    ])
+    ]),
   );
 
   return {
