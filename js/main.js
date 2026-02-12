@@ -5,6 +5,30 @@ const currentCountEl = document.getElementById("current-count");
 const startDateEl = document.getElementById("start-date");
 const resultsEl = document.getElementById("results");
 
+function isIosSafari() {
+  const ua = navigator.userAgent;
+  const isIOS =
+    /iPhone|iPad|iPod/.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isWebKit = /WebKit/i.test(ua);
+  const isCriOS = /CriOS/i.test(ua);
+  const isFxiOS = /FxiOS/i.test(ua);
+  return isIOS && isWebKit && !isCriOS && !isFxiOS;
+}
+
+function installIosKeyboardFocusAssist() {
+  if (!isIosSafari()) return;
+
+  const fields = [currentCountEl, startDateEl];
+  for (const field of fields) {
+    field.addEventListener("focus", () => {
+      window.setTimeout(() => {
+        field.scrollIntoView({ block: "center", inline: "nearest" });
+      }, 250);
+    });
+  }
+}
+
 function toDateInputValueLocal(d) {
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -103,3 +127,4 @@ form.addEventListener("reset", () => {
 });
 
 initStartDatePickerAndBounds();
+installIosKeyboardFocusAssist();
