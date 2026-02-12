@@ -1,50 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="format-detection" content="telephone=no" />
     <title>Camp Milestones</title>
     <meta
       name="description"
       content="Calculate projected camp milestone dates for the current year."
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <main>
-      <h1>Camp Milestones Calculator</h1>
-
-      <form id="milestone-form" novalidate>
-        <label for="current-count">Current Camps Attended:</label>
-        <input
-          type="number"
-          id="current-count"
-          name="current-count"
-          min="0"
-          step="1"
-          inputmode="numeric"
-          aria-describedby="count-hint"
-          required
+    <main class="app-shell">
+      <header class="hero stack">
+        <img
+          class="logo"
+          src="assets/camp-milestones-logo.png"
+          alt="Camp Milestones Logo"
+          height="100"
         />
-        <p class="hint" id="count-hint">
-          Count includes today if you already attended a camp today.
-        </p>
+        <div class="hero-copy stack">
+          <p class="hero-subtitle">
+            Track your pace and see when you will hit each milestone this year.
+          </p>
+        </div>
+      </header>
 
-        <label for="start-date">Start Date:</label>
-        <input
-          type="date"
-          id="start-date"
-          name="start-date"
-          aria-describedby="date-hint"
-          required
-        />
-        <p class="hint" id="date-hint">
-          Start date is your first camp of the current year (milestones reset
-          Jan 1).
-        </p>
+      <form id="milestone-form" class="stack" novalidate>
+        <div class="field stack">
+          <label for="current-count">Current Camps:</label>
+          <input
+            type="number"
+            id="current-count"
+            name="current-count"
+            min="0"
+            max="365"
+            step="1"
+            inputmode="numeric"
+            enterkeyhint="done"
+            aria-describedby="count-hint"
+            required
+          />
+          <p class="hint" id="count-hint">
+            Count includes today if you already attended a camp today.
+          </p>
+        </div>
 
-        <button type="reset">Reset</button>
-        <p class="hint">Updates automatically.</p>
+        <div class="field stack">
+          <label for="start-date">Start Date:</label>
+          <input
+            type="date"
+            id="start-date"
+            name="start-date"
+            aria-describedby="date-hint"
+            required
+          />
+          <p class="hint" id="date-hint">
+            Start date is your first camp of the current year (milestones reset
+            Jan 1).
+          </p>
+        </div>
+
+        <div class="form-footer stack">
+          <button type="reset">Reset</button>
+          <p class="hint">Updates automatically.</p>
+        </div>
       </form>
 
       <section id="results" hidden aria-live="polite" aria-atomic="true">
@@ -90,7 +114,7 @@
         </div>
       </section>
 
-      <script type="module" src="./main.js"></script>
+      <script type="module" src="js/main.js"></script>
     </main>
   </body>
 </html>
